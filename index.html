@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Voting</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 0;
+    padding: 50px;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.schools {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.school {
+    margin: 20px;
+    width: 200px; /* Set a fixed width for uniformity */
+}
+
+.school img {
+    width: 100%; /* Make the image responsive */
+    height: 120px; /* Fixed height for uniformity */
+    border-radius: 8px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vote for Your School!</h1>
+        <div class="schools">
+            <div class="school">
+                <img src="devasya.jpg" alt="School A">
+                <button onclick="vote('school1')">Vote for Devasya</button>
+            </div>
+            <div class="school">
+                <img src="stmary.jpg" alt="School B">
+                <button onclick="vote('school2')">Vote for St-Mary</button>
+            </div>
+            <div class="school">
+                <img src="gayatri.jpg" alt="School C">
+                <button onclick="vote('school3')">Vote for Gayatri</button>
+            </div>
+            <div class="school">
+                <img src="divinelife.jpg" alt="School D">
+                <button onclick="vote('school4')">Vote for Divine-Life</button>
+            </div>
+            <div class="school">
+                <img src="southinternational.jpg" alt="School E">
+                <button onclick="vote('school5')">Vote for South-international</button>
+            </div>
+        </div>
+        <div id="result">
+            <h2>Voting Results</h2>
+            <p id="school1-votes">Devasya: 0%</p>
+            <p id="school2-votes">St-Mary: 0%</p>
+            <p id="school3-votes">Gayatri: 0%</p>
+            <p id="school4-votes">Divine-Life: 0%</p>
+            <p id="school5-votes">South-international: 0%</p>
+        </div>
+    </div>
+    <script>
+        let votes = {
+    school1: 0,
+    school2: 0,
+    school3: 0,
+    school4: 0,
+    school5: 0,
+};
+
+let hasVoted = false;
+
+function vote(school) {
+    if (hasVoted) {
+        alert("You have already voted! You cannot vote again.");
+        return;
+    }
+
+    votes[school]++;
+    hasVoted = true;
+    updateResults();
+    disableButtons();
+}
+
+function updateResults() {
+    const totalVotes = votes.school1 + votes.school2 + votes.school3 + votes.school4 + votes.school5;
+
+    if (totalVotes > 0) {
+        document.getElementById('school1-votes').innerText = `Devasya: ${(votes.school1 / totalVotes * 100).toFixed(2)}%`;
+        document.getElementById('school2-votes').innerText = `St-Mary: ${(votes.school2 / totalVotes * 100).toFixed(2)}%`;
+        document.getElementById('school3-votes').innerText = `Gayatri: ${(votes.school3 / totalVotes * 100).toFixed(2)}%`;
+        document.getElementById('school4-votes').innerText = `Divine-Life: ${(votes.school4 / totalVotes * 100).toFixed(2)}%`;
+        document.getElementById('school5-votes').innerText = `South-international: ${(votes.school5 / totalVotes * 100).toFixed(2)}%`;
+    } else {
+        document.getElementById('school1-votes').innerText = `School A: 0%`;
+        document.getElementById('school2-votes').innerText = `School B: 0%`;
+        document.getElementById('school3-votes').innerText = `School C: 0%`;
+        document.getElementById('school4-votes').innerText = `School D: 0%`;
+        document.getElementById('school5-votes').innerText = `School E: 0%`;
+    }
+}
+
+function disableButtons() {
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => button.disabled = true);
+}
+
+    </script>
+</body>
+</html>
